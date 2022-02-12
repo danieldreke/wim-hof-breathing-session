@@ -25,11 +25,30 @@
     }
 
     function onYouTubePlayerReady(event) {
+      playVideo();
+    }
+
+    function playVideo() {
       ytplayer.playVideo()
+    }
+
+    function pauseVideo() {
+      ytplayer.pauseVideo()
+    }
+
+    function togglePlayPauseVideo() {
+      if (isVideoPlaying()) { pauseVideo() } else { playVideo() }
+    }
+
+    function isVideoPlaying() {
+      var isPlaying = ytplayer.getPlayerState() == 1;
+      return isPlaying;
     }
 
     function seekToVideoTime(timeInSeconds) {
       ytplayer.seekTo(timeInSeconds);
+      if (!isVideoPlaying()) playVideo();
+
     }
   </script>
   <style>
@@ -54,5 +73,8 @@
   <br><br><a href="javascript:seekToVideoTime(18)">Start Round 1</a>
   <br><br><a href="javascript:seekToVideoTime(196)">Go to Round 2</a>
   <br><br><a href="javascript:seekToVideoTime(198)">Skip Round 2 Intro</a>
+  <!--<br><br><a href="javascript:pauseVideo()">Pause</a>-->
+  <!--<br><br><a href="javascript:playVideo()">Play</a>-->
+  <br><br><a href="javascript:togglePlayPauseVideo()">Play / Pause</a>
 </body>
 </html>
