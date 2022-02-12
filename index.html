@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     // [1] YouTube IFrame API Code Example: https://developers.google.com/youtube/iframe_api_reference#Getting_Started
@@ -26,15 +27,30 @@
     function onYouTubePlayerReady(event) {
       ytplayer.playVideo()
     }
+
+    function seekToVideoTime(timeInSeconds) {
+      ytplayer.seekTo(timeInSeconds);
+    }
   </script>
   <style>
+    body {
+      text-align: center;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 24px;
+    }
     iframe {
       display: block;
       margin: 0 auto;
+    }
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div id="ytplayer"></div>
+  <br><a href="javascript:seekToVideoTime(18)">Round 1</a> •
+  <a href="javascript:seekToVideoTime(196)">Round 2</a> •
+  <a href="javascript:seekToVideoTime(404)">Round 3</a>
 </body>
 </html>
