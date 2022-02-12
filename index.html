@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    // [1] YouTube IFrame API Code Example: https://developers.google.com/youtube/iframe_api_reference#Getting_Started
+    // [2] Guided Wim Hof Breathing: https://youtu.be/tybOi4hjZFQ
+
+    function onYouTubeIframeAPIReady() {
+      createYouTubePlayer();
+    }
+
+    var ytplayer;
+    function createYouTubePlayer() {
+      ytplayer = new YT.Player('ytplayer', {
+        height: '270',
+        width: '480',
+        videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
+        playerVars: { 'playsinline': 1 }, // Play video inline on iOS [3]
+        events: { 'onReady': onYouTubePlayerReady }
+      });
+      // [3] Parameter playsinline: https://developers.google.com/youtube/player_parameters#Parameters
+    }
+
+    function onYouTubePlayerReady(event) {
+      ytplayer.playVideo()
+    }
+  </script>
+</head>
+<body>
+  <div id="ytplayer"></div>
+</body>
+</html>
