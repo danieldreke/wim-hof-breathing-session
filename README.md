@@ -1,2 +1,1 @@
-# wim-hof-breathing-exercise
-Customizable Guided Wim Hof Breathing Exercise
+# Customizable Wim Hof Breathing Exercise
