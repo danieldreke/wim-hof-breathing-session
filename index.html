@@ -20,7 +20,14 @@
         height: '270',
         width: '480',
         videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
-        playerVars: { 'playsinline': 1, 'controls': 0 }, // Play video inline on iOS [3]
+        playerVars: {
+          'playsinline': 1, // Play video inline on iOS [3]
+          'controls': 0,
+          'rel' : 0,
+          'showinfo' : 0,
+          'showsearch' : 0,
+          'modestbranding' : 1
+        },
         events: {
           'onReady': onYouTubePlayerReady,
           'onStateChange': onPlayerStateChange
@@ -102,18 +109,17 @@
       padding-bottom: 56.25%;
     }
     .vertical-centered {
-      margin: 0;
-      position: absolute;
+      margin: auto;
+      position: relative;
       top: 50%;
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
-      border: 0px solid red;
       width: 100%;
+      max-width: 80vh;
     }
     .container {
       height: 100vh;
       position: relative;
-      border: 0px solid black;
     }
   </style>
 </head>
