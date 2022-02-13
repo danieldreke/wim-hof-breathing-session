@@ -1,3 +1,3 @@
-## Customizable Wim Hof Breathing Exercise
+## Customizable Wim Hof Breathing Session
 
-To start open [danieldreke.github.io/wim-hof-breathing-exercise](https://danieldreke.github.io/wim-hof-breathing-exercise/)
+To start open [danieldreke.github.io/wim-hof-breathing-session](https://danieldreke.github.io/wim-hof-breathing-session/)
