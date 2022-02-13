@@ -83,6 +83,7 @@
       text-align: center;
       font-family: "Ubuntu", sans-serif;
       font-size: 48px;
+      margin: 0px;
     }
     iframe {
       position: absolute;
@@ -94,25 +95,43 @@
     a {
       text-decoration: none;
     }
-    .container {
+    .iframe-container {
       position: relative;
       width: 100%;
       height: 0;
       padding-bottom: 56.25%;
     }
+    .vertical-centered {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      border: 0px solid red;
+      width: 100%;
+    }
+    .container {
+      height: 100vh;
+      position: relative;
+      border: 0px solid black;
+    }
   </style>
 </head>
 <body>
-  <!-- https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed -->
+  <!-- https://www.w3schools.com/howto/howto_css_center-vertical.asp -->
   <div class="container">
-    <div id="ytplayer"></div>
+    <div class="vertical-centered">
+      <!-- https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed -->
+      <div class="iframe-container">
+        <div id="ytplayer"></div>
+      </div>
+      <br><a href="javascript:startSession()">Start Session</a> / <a href="javascript:seekToVideoTime(12)">Skip Intro</a>
+      <br><br><a id="pausecontinue" href="javascript:pauseContinueSession()">Play / Pause</a>
+      <!--<br><br><a href="javascript:seekToVideoTime(18)">Start Round 1</a>-->
+      <br><br><a href="javascript:seekToVideoTime(196)">Play Round 2</a>
+      <br><br><a href="javascript:seekToVideoTime(404)">Play Round 3</a>
+      <!--<br><br><a href="javascript:seekToVideoTime(198)">Skip Round 2 Intro</a>-->
+    </div>
   </div>
-  <br><a href="javascript:startSession()">Start Session</a> / <a href="javascript:seekToVideoTime(12)">Skip Intro</a>
-  <br><br><a id="pausecontinue" href="javascript:pauseContinueSession()">Play / Pause</a>
-  <!--<br><br><a href="javascript:seekToVideoTime(18)">Start Round 1</a>-->
-  <br><br><a href="javascript:seekToVideoTime(196)">Play Round 2</a>
-  <br><br><a href="javascript:seekToVideoTime(404)">Play Round 3</a>
-  <!--<br><br><a href="javascript:seekToVideoTime(198)">Skip Round 2 Intro</a>-->
-  <br><br>
 </body>
 </html>
