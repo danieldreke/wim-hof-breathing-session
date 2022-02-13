@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1">
   <!-- Fullscreen: https://developers.google.com/web/fundamentals/native-hardware/fullscreen -->
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
@@ -23,9 +24,6 @@
         playerVars: {
           'playsinline': 1, // Play video inline on iOS [3]
           'controls': 0,
-          'rel' : 0,
-          'showinfo' : 0,
-          'showsearch' : 0,
           'modestbranding' : 1
         },
         events: {
@@ -89,8 +87,14 @@
     body {
       text-align: center;
       font-family: "Ubuntu", sans-serif;
-      font-size: 48px;
+      font-size: 24px;
       margin: 0px;
+    }
+    @media (min-height: 1200) and (orientation: portrait) {
+      body { font-size: 36px; }
+    }
+    @media (min-height: 1600) and (orientation: portrait) {
+      body { font-size: 48px; }
     }
     iframe {
       position: absolute;
