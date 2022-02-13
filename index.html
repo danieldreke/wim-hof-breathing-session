@@ -21,13 +21,32 @@
         width: '480',
         videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
         playerVars: { 'playsinline': 1, 'controls': 0 }, // Play video inline on iOS [3]
-        events: { 'onReady': onYouTubePlayerReady }
+        events: {
+          'onReady': onYouTubePlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
       });
       // [3] Parameter playsinline: https://developers.google.com/youtube/player_parameters#Parameters
     }
 
     function onYouTubePlayerReady(event) {
       playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+      isPlaying = event.data == YT.PlayerState.PLAYING;
+      isPaused = event.data == YT.PlayerState.PAUSED;
+      isPlayingOrPaused = isPlaying || isPaused;
+      if (isPlayingOrPaused) updateControls();
+    }
+
+    function updateControls() {
+      var pauseContinue = document.getElementById("pausecontinue");
+      if (isVideoPlaying()) {
+        pauseContinue.innerHTML = "Pause Session";
+      } else {
+        pauseContinue.innerHTML = "Continue Session";
+      }
     }
 
     function playVideo() {
@@ -38,10 +57,6 @@
       ytplayer.pauseVideo()
     }
 
-    function togglePlayPauseVideo() {
-      if (isVideoPlaying()) { pauseVideo() } else { playVideo() }
-    }
-
     function isVideoPlaying() {
       var isPlaying = ytplayer.getPlayerState() == 1;
       return isPlaying;
@@ -50,7 +65,17 @@
     function seekToVideoTime(timeInSeconds) {
       ytplayer.seekTo(timeInSeconds);
       if (!isVideoPlaying()) playVideo();
+    }
 
+    function startSession() {
+      seekToVideoTime(0);
+    }
+
+    function pauseContinueSession() {
+      if (isVideoPlaying())
+        pauseVideo();
+      else
+        playVideo();
     }
   </script>
   <style>
@@ -82,12 +107,12 @@
   <div class="container">
     <div id="ytplayer"></div>
   </div>
-  <br><a href="javascript:seekToVideoTime(0)">Start Breathing Session</a>
-  <br><br><a href="javascript:seekToVideoTime(12)">Skip Intro</a>
+  <br><a href="javascript:startSession()">Start Session</a> / <a href="javascript:seekToVideoTime(12)">Skip Intro</a>
+  <br><br><a id="pausecontinue" href="javascript:pauseContinueSession()">Play / Pause</a>
   <!--<br><br><a href="javascript:seekToVideoTime(18)">Start Round 1</a>-->
   <br><br><a href="javascript:seekToVideoTime(196)">Play Round 2</a>
   <br><br><a href="javascript:seekToVideoTime(404)">Play Round 3</a>
   <!--<br><br><a href="javascript:seekToVideoTime(198)">Skip Round 2 Intro</a>-->
-  <br><br><a href="javascript:togglePlayPauseVideo()">Play / Pause</a>
+  <br><br>
 </body>
 </html>
