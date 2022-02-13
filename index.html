@@ -57,19 +57,31 @@
     body {
       text-align: center;
       font-family: "Ubuntu", sans-serif;
-      font-size: 24px;
+      font-size: 48px;
     }
     iframe {
-      display: block;
-      margin: 0 auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
     a {
       text-decoration: none;
     }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+    }
   </style>
 </head>
 <body>
-  <div id="ytplayer"></div>
+  <!-- https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed -->
+  <div class="container">
+    <div id="ytplayer"></div>
+  </div>
   <br><a href="javascript:seekToVideoTime(0)">Start Breathing Session</a>
   <br><br><a href="javascript:seekToVideoTime(12)">Skip Intro</a>
   <!--<br><br><a href="javascript:seekToVideoTime(18)">Start Round 1</a>-->
