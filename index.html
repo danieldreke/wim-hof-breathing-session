@@ -2,9 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1">
-  <!-- Fullscreen: https://developers.google.com/web/fundamentals/native-hardware/fullscreen -->
   <link rel="manifest" href="/manifest.json">
+  <!-- https://github.com/piotrswigon/pwa-demo/blob/master/fullscreen/index.html -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <!-- Fullscreen: https://developers.google.com/web/fundamentals/native-hardware/fullscreen -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
@@ -143,5 +144,6 @@
       <!--<br><br><a href="javascript:seekToVideoTime(198)">Skip Round 2 Intro</a>-->
     </div>
   </div>
+  <script src="register-service-worker.js"></script>
 </body>
 </html>
