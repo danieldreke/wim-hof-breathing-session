@@ -3,6 +3,10 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-size: 24px;
   margin: 0px;
+  background-color: rgb(70, 140, 210);
+}
+body, a {
+  color: white;
 }
 @media (min-height: 1200) and (orientation: portrait) {
   body { font-size: 36px; }
