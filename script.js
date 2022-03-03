@@ -66,12 +66,28 @@ function playVideoAtTime(timeInSeconds) {
   playVideo();
 }
 
+function hideElementById(elementId) {
+  document.getElementById(elementId).style.display = "none";
+}
+
+function showElementById(elementId) {
+  document.getElementById(elementId).style.display = "inline-block";
+}
+
 function startSession() {
   playVideoAtTime(0);
+  hideElementById("startsession");
+  hideElementById("skipintro");
+  showElementById("pauseresume");
+  showElementById("replayround2");
 }
 
 function skipIntro() {
   playVideoAtTime(12);
+  hideElementById("startsession");
+  hideElementById("skipintro");
+  showElementById("pauseresume");
+  showElementById("replayround2");
 }
 
 function replayRound2() {
