@@ -36,39 +36,56 @@ function onPlayerStateChange(event) {
 }
 
 function updateControls() {
-  var pauseContinue = document.getElementById("pausecontinue");
-  if (isVideoPlaying()) {
-    pauseContinue.innerHTML = "Pause Session";
+  var pauseResume = document.getElementById("pauseresume");
+  if (isSessionInProgress()) {
+    pauseResume.innerHTML = "Pause Session";
   } else {
-    pauseContinue.innerHTML = "Continue Session";
+    pauseResume.innerHTML = "Resume Session";
   }
 }
 
+function resumeSession() {
+  playVideo();
+}
+
 function playVideo() {
-  ytplayer.playVideo()
+  ytplayer.playVideo();
 }
 
-function pauseVideo() {
-  ytplayer.pauseVideo()
+function pauseSession() {
+  ytplayer.pauseVideo();
 }
 
-function isVideoPlaying() {
-  var isPlaying = ytplayer.getPlayerState() == 1;
-  return isPlaying;
+function isSessionInProgress() {
+  var isVideoPlaying = ytplayer.getPlayerState() == 1;
+  return isVideoPlaying;
 }
 
-function seekToVideoTime(timeInSeconds) {
+function playVideoAtTime(timeInSeconds) {
   ytplayer.seekTo(timeInSeconds);
-  if (!isVideoPlaying()) playVideo();
+  playVideo();
 }
 
 function startSession() {
-  seekToVideoTime(0);
+  playVideoAtTime(0);
 }
 
-function pauseContinueSession() {
-  if (isVideoPlaying())
-    pauseVideo();
+function skipIntro() {
+  playVideoAtTime(12);
+}
+
+function replayRound2() {
+  playVideoAtTime(196);
+}
+
+function replayRound3() {
+  playVideoAtTime(404);
+}
+
+// wording resume vs continue: https://ux.stackexchange.com/a/130248
+function pauseResumeSession() {
+  if (isSessionInProgress())
+    pauseSession();
   else
-    playVideo();
+    resumeSession();
 }

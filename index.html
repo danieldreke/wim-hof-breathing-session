@@ -20,12 +20,10 @@
       <div class="iframe-container">
         <div id="ytplayer"></div>
       </div>
-      <br><a href="javascript:startSession()">Start Session</a> / <a href="javascript:seekToVideoTime(12)">Skip Intro</a>
-      <br><br><a id="pausecontinue" href="javascript:pauseContinueSession()">Play / Pause</a>
-      <!--<br><br><a href="javascript:seekToVideoTime(18)">Start Round 1</a>-->
-      <br><br><a href="javascript:seekToVideoTime(196)">Play Round 2</a>
-      <br><br><a href="javascript:seekToVideoTime(404)">Play Round 3</a>
-      <!--<br><br><a href="javascript:seekToVideoTime(198)">Skip Round 2 Intro</a>-->
+      <br><a id="startskip" href="javascript:startSession()">Start Session</a> / <a href="javascript:skipIntro()">Skip Intro</a>
+      <br><br><a id="pauseresume" href="javascript:pauseResumeSession()">Play / Pause</a>
+      <br><br><a id="round2" href="javascript:replayRound2()">Replay Round 2</a>
+      <br><br><a id="round3" href="javascript:replayRound3()">Replay Round 3</a>
     </div>
   </div>
   <!-- service worker registration: https://github.com/piotrswigon/pwa-demo/blob/master/script.js -->
