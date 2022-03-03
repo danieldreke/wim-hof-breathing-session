@@ -20,10 +20,13 @@
       <div class="iframe-container">
         <div id="ytplayer"></div>
       </div>
-      <br><a id="startskip" href="javascript:startSession()">Start Session</a> / <a href="javascript:skipIntro()">Skip Intro</a>
-      <br><br><a id="pauseresume" href="javascript:pauseResumeSession()">Play / Pause</a>
-      <br><br><a id="round2" href="javascript:replayRound2()">Replay Round 2</a>
-      <br><br><a id="round3" href="javascript:replayRound3()">Replay Round 3</a>
+      <div id="controls-container">
+        <button type="button" id="startsession" onclick="javascript:startSession()">Start Session</button>
+        <button type="button" id="skipintro" onclick="javascript:skipIntro()">Skip Intro</button>
+        <button type="button" id="pauseresume" onclick="javascript:pauseResumeSession()">Pause Session</button>
+        <button type="button" id="replayround3" onclick="javascript:replayRound3()">One more round</button>
+        <button type="button" id="replayround2" onclick="javascript:replayRound2()">Two more rounds</button>
+      </div>
     </div>
   </div>
   <!-- service worker registration: https://github.com/piotrswigon/pwa-demo/blob/master/script.js -->
