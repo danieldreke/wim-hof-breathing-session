@@ -2,9 +2,10 @@
 
 Click [here](https://danieldreke.github.io/wim-hof-breathing-session/) to start a breathing session video guided by Wim Hof.
 
-### Motivation / Feature
+### Motivation / Features
 
-- You can do more than three rounds by clicking on `Round Two` or `Round Three` after the third round ends.
+- Do more than three rounds by clicking on `Round Two` or `Round Three` after the third round ends.
+- Easily pause and continue your breathing session with one click for longer retention than 1:30 minutes.
 
 ### Notes
 
