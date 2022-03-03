@@ -26,6 +26,16 @@ function createYouTubePlayer() {
 
 function onYouTubePlayerReady(event) {
   playVideo();
+  function checkCurrentTime() {
+    if (ytplayer && ytplayer.getCurrentTime) {
+      videotime = ytplayer.getCurrentTime();
+      if (videotime > 600) {
+        showElementById("replayround2");
+        showElementById("replayround3");
+      }
+    }
+  }
+  timeupdater = setInterval(checkCurrentTime, 100);
 }
 
 function onPlayerStateChange(event) {
@@ -79,7 +89,7 @@ function startSession() {
   hideElementById("startsession");
   hideElementById("skipintro");
   showElementById("pauseresume");
-  showElementById("replayround2");
+  //showElementById("replayround2");
 }
 
 function skipIntro() {
@@ -87,14 +97,18 @@ function skipIntro() {
   hideElementById("startsession");
   hideElementById("skipintro");
   showElementById("pauseresume");
-  showElementById("replayround2");
+  //showElementById("replayround2");
 }
 
 function replayRound2() {
+  hideElementById("replayround2");
+  hideElementById("replayround3");
   playVideoAtTime(196);
 }
 
 function replayRound3() {
+  hideElementById("replayround2");
+  hideElementById("replayround3");
   playVideoAtTime(404);
 }
 
