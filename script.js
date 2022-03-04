@@ -21,7 +21,7 @@ function createYouTubePlayer() {
     videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
     playerVars: {
       'playsinline': 1, // Play video inline on iOS [3]
-      'controls': 1,
+      'controls': 0,
       'modestbranding' : 1
     },
     events: {
@@ -32,15 +32,19 @@ function createYouTubePlayer() {
 }
 
 function onYouTubePlayerReady(event) {
-  playVideo();
+  //playVideo();
   function checkCurrentTime() {
     if (ytplayer && ytplayer.getCurrentTime) {
       videotime = ytplayer.getCurrentTime();
+      isIntroFinished = videotime >= 12;
       isEndOfRound3 = videotime > 612;
       isEndOfRound1Retention = videotime >= 159 && videotime <= 177;
       isEndOfRound2Retention = videotime >= 372 && videotime <= 386;
       isEndOfRound3Retention = videotime >= 581 && videotime <= 595;
       isEndOfRetention = isEndOfRound1Retention || isEndOfRound2Retention || isEndOfRound3Retention;
+      if (isIntroFinished) {
+        hideElementById(BUTTON_SKIP_INTRO);
+      }
       if (isEndOfRound3) {
         showElementById(BUTTON_REPLAY_ROUND_2);
         showElementById(BUTTON_REPLAY_ROUND_3);
@@ -57,7 +61,7 @@ function onYouTubePlayerReady(event) {
       }
     }
   }
-  timeupdater = setInterval(checkCurrentTime, 500);
+  timeupdater = setInterval(checkCurrentTime, 200);
 }
 
 function onPlayerStateChange(event) {
@@ -109,13 +113,12 @@ function showElementById(elementId) {
 function startSession() {
   playVideoAtTime(0);
   hideElementById(BUTTON_START_SESSION);
-  hideElementById(BUTTON_SKIP_INTRO);
+  showElementById(BUTTON_SKIP_INTRO);
 }
 
 function skipIntro() {
-  playVideoAtTime(12);
-  hideElementById(BUTTON_START_SESSION);
   hideElementById(BUTTON_SKIP_INTRO);
+  playVideoAtTime(12);
 }
 
 function replayRound2() {
