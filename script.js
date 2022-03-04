@@ -28,6 +28,7 @@ function createYouTubePlayer() {
     width: '480',
     videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
     playerVars: {
+      'autoplay': 0,
       'playsinline': 1, // Play video inline on iOS [3]
       'controls': 0,
       'modestbranding' : 1
