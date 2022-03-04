@@ -37,7 +37,7 @@ function onYouTubePlayerReady(event) {
     if (ytplayer && ytplayer.getCurrentTime) {
       videotime = ytplayer.getCurrentTime();
       isIntroFinished = videotime >= 12;
-      isEndOfRound3 = videotime > 612;
+      isEndOfRound3 = videotime >= 611 && videotime <= 631;
       isEndOfRound1Retention = videotime >= 159 && videotime <= 177;
       isEndOfRound2Retention = videotime >= 372 && videotime <= 386;
       isEndOfRound3Retention = videotime >= 581 && videotime <= 595;
