@@ -5,8 +5,16 @@
 const BUTTON_START_SESSION = "startsession";
 const BUTTON_SKIP_INTRO = "skipintro";
 const BUTTON_PAUSE_RESUME = "pauseresume";
+const BUTTON_START_BREATHING_IN = "startbreathingin";
 const BUTTON_REPLAY_ROUND_2 = "replayround2";
 const BUTTON_REPLAY_ROUND_3 = "replayround3";
+
+const STARTTIME_BREATHING_ROUND_1 = 176;
+const STARTTIME_BREATHING_ROUND_2 = 385;
+const STARTTIME_BREATHING_ROUND_3 = 593;
+const ENDTIME_ROUND_1 = STARTTIME_BREATHING_ROUND_1 + 16;
+const ENDTIME_ROUND_2 = STARTTIME_BREATHING_ROUND_2 + 16;
+const ENDTIME_ROUND_3 = STARTTIME_BREATHING_ROUND_3 + 16;
 
 var ytplayer;
 
@@ -31,19 +39,38 @@ function createYouTubePlayer() {
   });
 }
 
+function getVideoTime() {
+  videotime = ytplayer.getCurrentTime();
+  return videotime;
+}
+
+function isCloseToEndOfRetention() {
+  var videotime = getVideoTime();
+  var isCloseToEndOfRetention1 = videotime >= 159 && videotime <= 177;
+  var isCloseToEndOfRetention2 = videotime >= 372 && videotime <= 386;
+  var isCloseToEndOfRetention3 = videotime >= 581 && videotime <= 595;
+  var isCloseToEndOfRetention_ = isCloseToEndOfRetention1 || isCloseToEndOfRetention2 || isCloseToEndOfRetention3;
+  return isCloseToEndOfRetention_;
+}
+
 function onYouTubePlayerReady(event) {
-  //playVideo();
+  pauseVideo();
+  showElementById(BUTTON_START_SESSION);
   function checkCurrentTime() {
     if (ytplayer && ytplayer.getCurrentTime) {
-      videotime = ytplayer.getCurrentTime();
-      isIntroFinished = videotime >= 12;
-      isEndOfRound3 = videotime >= 611 && videotime <= 631;
-      isEndOfRound1Retention = videotime >= 159 && videotime <= 177;
-      isEndOfRound2Retention = videotime >= 372 && videotime <= 386;
-      isEndOfRound3Retention = videotime >= 581 && videotime <= 595;
-      isEndOfRetention = isEndOfRound1Retention || isEndOfRound2Retention || isEndOfRound3Retention;
+      var videotime = getVideoTime();
+      var isIntroFinished = videotime >= 12;
+      var isCloseToEndOfRetention_ = isCloseToEndOfRetention();
+      var isEndOfRound3 = videotime >= 611 && videotime <= 631;
       if (isIntroFinished) {
         hideElementById(BUTTON_SKIP_INTRO);
+      }
+      if (isCloseToEndOfRetention_) {
+        showElementById(BUTTON_PAUSE_RESUME);
+      }
+      else {
+        hideElementById(BUTTON_PAUSE_RESUME);
+        hideElementById(BUTTON_START_BREATHING_IN);
       }
       if (isEndOfRound3) {
         showElementById(BUTTON_REPLAY_ROUND_2);
@@ -52,12 +79,6 @@ function onYouTubePlayerReady(event) {
       else {
         hideElementById(BUTTON_REPLAY_ROUND_2);
         hideElementById(BUTTON_REPLAY_ROUND_3);
-      }
-      if (isEndOfRetention) {
-        showElementById(BUTTON_PAUSE_RESUME);
-      }
-      else {
-        hideElementById(BUTTON_PAUSE_RESUME);
       }
     }
   }
@@ -73,14 +94,14 @@ function onPlayerStateChange(event) {
 
 function updateControls() {
   var pauseResume = document.getElementById(BUTTON_PAUSE_RESUME);
-  if (isSessionInProgress()) {
-    pauseResume.innerHTML = "Pause Session";
+  if (isVideoPlaying()) {
+    pauseResume.innerHTML = "Pause Video";
   } else {
-    pauseResume.innerHTML = "Resume Session";
+    pauseResume.innerHTML = "Resume Video";
   }
 }
 
-function resumeSession() {
+function resumeVideo() {
   playVideo();
 }
 
@@ -88,11 +109,15 @@ function playVideo() {
   ytplayer.playVideo();
 }
 
-function pauseSession() {
+function pauseVideo() {
   ytplayer.pauseVideo();
+  var isCloseToEndOfRetention_ = isCloseToEndOfRetention();
+  if (isCloseToEndOfRetention_) {
+    showElementById(BUTTON_START_BREATHING_IN);
+  }
 }
 
-function isSessionInProgress() {
+function isVideoPlaying() {
   var isVideoPlaying = ytplayer.getPlayerState() == 1;
   return isVideoPlaying;
 }
@@ -121,6 +146,23 @@ function skipIntro() {
   playVideoAtTime(12);
 }
 
+function startBreathingIn() {
+  videotime = getVideoTime();
+  isRound1 = videotime <= ENDTIME_ROUND_1;
+  isRound2 = videotime > ENDTIME_ROUND_1 && videotime <= ENDTIME_ROUND_2;
+  isRound3 = videotime > ENDTIME_ROUND_2 && videotime <= ENDTIME_ROUND_3;
+  if (isRound1) {
+    playVideoAtTime(STARTTIME_BREATHING_ROUND_1);
+  }
+  else if (isRound2) {
+    playVideoAtTime(STARTTIME_BREATHING_ROUND_2);
+  }
+  else if (isRound3) {
+    playVideoAtTime(STARTTIME_BREATHING_ROUND_3);
+  }
+  hideElementById(BUTTON_START_BREATHING_IN);
+}
+
 function replayRound2() {
   hideElementById(BUTTON_REPLAY_ROUND_2);
   hideElementById(BUTTON_REPLAY_ROUND_3);
@@ -134,9 +176,9 @@ function replayRound3() {
 }
 
 // wording resume vs continue: https://ux.stackexchange.com/a/130248
-function pauseResumeSession() {
-  if (isSessionInProgress())
-    pauseSession();
+function pauseResumeVideo() {
+  if (isVideoPlaying())
+    pauseVideo();
   else
-    resumeSession();
+    resumeVideo();
 }
