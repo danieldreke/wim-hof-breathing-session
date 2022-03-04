@@ -2,11 +2,18 @@
 // [2] Guided Wim Hof Breathing: https://youtu.be/tybOi4hjZFQ
 // [3] Parameter playsinline: https://developers.google.com/youtube/player_parameters#Parameters
 
+const BUTTON_START_SESSION = "startsession";
+const BUTTON_SKIP_INTRO = "skipintro";
+const BUTTON_PAUSE_RESUME = "pauseresume";
+const BUTTON_REPLAY_ROUND_2 = "replayround2";
+const BUTTON_REPLAY_ROUND_3 = "replayround3";
+
+var ytplayer;
+
 function onYouTubeIframeAPIReady() {
   createYouTubePlayer();
 }
 
-var ytplayer;
 function createYouTubePlayer() {
   ytplayer = new YT.Player('ytplayer', {
     height: '270',
@@ -14,7 +21,7 @@ function createYouTubePlayer() {
     videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
     playerVars: {
       'playsinline': 1, // Play video inline on iOS [3]
-      'controls': 0,
+      'controls': 1,
       'modestbranding' : 1
     },
     events: {
@@ -29,13 +36,28 @@ function onYouTubePlayerReady(event) {
   function checkCurrentTime() {
     if (ytplayer && ytplayer.getCurrentTime) {
       videotime = ytplayer.getCurrentTime();
-      if (videotime > 600) {
-        showElementById("replayround2");
-        showElementById("replayround3");
+      isEndOfRound3 = videotime > 612;
+      isEndOfRound1Retention = videotime >= 159 && videotime <= 177;
+      isEndOfRound2Retention = videotime >= 372 && videotime <= 386;
+      isEndOfRound3Retention = videotime >= 581 && videotime <= 595;
+      isEndOfRetention = isEndOfRound1Retention || isEndOfRound2Retention || isEndOfRound3Retention;
+      if (isEndOfRound3) {
+        showElementById(BUTTON_REPLAY_ROUND_2);
+        showElementById(BUTTON_REPLAY_ROUND_3);
+      }
+      else {
+        hideElementById(BUTTON_REPLAY_ROUND_2);
+        hideElementById(BUTTON_REPLAY_ROUND_3);
+      }
+      if (isEndOfRetention) {
+        showElementById(BUTTON_PAUSE_RESUME);
+      }
+      else {
+        hideElementById(BUTTON_PAUSE_RESUME);
       }
     }
   }
-  timeupdater = setInterval(checkCurrentTime, 100);
+  timeupdater = setInterval(checkCurrentTime, 500);
 }
 
 function onPlayerStateChange(event) {
@@ -46,7 +68,7 @@ function onPlayerStateChange(event) {
 }
 
 function updateControls() {
-  var pauseResume = document.getElementById("pauseresume");
+  var pauseResume = document.getElementById(BUTTON_PAUSE_RESUME);
   if (isSessionInProgress()) {
     pauseResume.innerHTML = "Pause Session";
   } else {
@@ -86,29 +108,25 @@ function showElementById(elementId) {
 
 function startSession() {
   playVideoAtTime(0);
-  hideElementById("startsession");
-  hideElementById("skipintro");
-  showElementById("pauseresume");
-  //showElementById("replayround2");
+  hideElementById(BUTTON_START_SESSION);
+  hideElementById(BUTTON_SKIP_INTRO);
 }
 
 function skipIntro() {
   playVideoAtTime(12);
-  hideElementById("startsession");
-  hideElementById("skipintro");
-  showElementById("pauseresume");
-  //showElementById("replayround2");
+  hideElementById(BUTTON_START_SESSION);
+  hideElementById(BUTTON_SKIP_INTRO);
 }
 
 function replayRound2() {
-  hideElementById("replayround2");
-  hideElementById("replayround3");
+  hideElementById(BUTTON_REPLAY_ROUND_2);
+  hideElementById(BUTTON_REPLAY_ROUND_3);
   playVideoAtTime(196);
 }
 
 function replayRound3() {
-  hideElementById("replayround2");
-  hideElementById("replayround3");
+  hideElementById(BUTTON_REPLAY_ROUND_2);
+  hideElementById(BUTTON_REPLAY_ROUND_3);
   playVideoAtTime(404);
 }
 
