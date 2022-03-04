@@ -19,7 +19,7 @@ button {
   border-radius: 6px;
   border: none;
 }
-#pauseresume, #replayround2, #replayround3 {
+#skipintro, #pauseresume, #replayround2, #replayround3 {
   display: none;
 }
 @media (min-height: 1200) and (orientation: portrait) {
