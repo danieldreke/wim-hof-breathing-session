@@ -9,6 +9,8 @@ const BUTTON_START_BREATHING_IN = "startbreathingin";
 const BUTTON_REPLAY_ROUND_2 = "replayround2";
 const BUTTON_REPLAY_ROUND_3 = "replayround3";
 
+const STARTTIME_ROUND_2 = 196;
+const STARTTIME_ROUND_3 = 404;
 const STARTTIME_BREATHING_ROUND_1 = 176;
 const STARTTIME_BREATHING_ROUND_2 = 385;
 const STARTTIME_BREATHING_ROUND_3 = 593;
@@ -55,7 +57,6 @@ function isCloseToEndOfRetention() {
 }
 
 function onYouTubePlayerReady(event) {
-  pauseVideo();
   showElementById(BUTTON_START_SESSION);
   function checkCurrentTime() {
     if (ytplayer && ytplayer.getCurrentTime) {
@@ -167,13 +168,13 @@ function startBreathingIn() {
 function replayRound2() {
   hideElementById(BUTTON_REPLAY_ROUND_2);
   hideElementById(BUTTON_REPLAY_ROUND_3);
-  playVideoAtTime(196);
+  playVideoAtTime(STARTTIME_ROUND_2);
 }
 
 function replayRound3() {
   hideElementById(BUTTON_REPLAY_ROUND_2);
   hideElementById(BUTTON_REPLAY_ROUND_3);
-  playVideoAtTime(404);
+  playVideoAtTime(STARTTIME_ROUND_3);
 }
 
 // wording resume vs continue: https://ux.stackexchange.com/a/130248
