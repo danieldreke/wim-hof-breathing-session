@@ -143,6 +143,7 @@ function startSession() {
   playVideoAtTime(0);
   hideElementById(BUTTON_START_SESSION);
   showElementById(BUTTON_SKIP_INTRO);
+  document.getElementById("ytplayer").classList.remove("disabled-events");
 }
 
 function skipIntro() {

@@ -61,3 +61,6 @@ iframe {
 #controls-container {
   height: 100px;
 }
+.disabled-events {
+  pointer-events: none;
+}
