@@ -122,7 +122,7 @@ function pauseVideo() {
 }
 
 function isVideoPlaying() {
-  var isVideoPlaying = ytplayer.getPlayerState() == 1;
+  var isVideoPlaying = ytplayer.getPlayerState() == YT.PlayerState.PLAYING;
   return isVideoPlaying;
 }
 
