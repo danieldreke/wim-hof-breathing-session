@@ -35,7 +35,8 @@ function createYouTubePlayer() {
       'controls': 0,
       'modestbranding': 1,
       'cc_lang_pref': 'en',
-      //'cc_load_policy': 0
+      //'cc_load_policy': 0,
+      'rel': 0 // only show related videos
     },
     events: {
       'onReady': onYouTubePlayerReady,
