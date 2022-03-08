@@ -64,3 +64,26 @@ iframe {
 .disabled-events {
   pointer-events: none;
 }
+#cboxlabel {
+  cursor: pointer;
+  display: none;
+  width: 320px;
+}
+input[type=checkbox] {
+  cursor: pointer;
+  filter: grayscale(100%) invert(80%);
+  width: 16px;
+  height: 16px;
+}
+input[type=checkbox]:hover {
+  filter: invert(80%);
+}
+input[type=checkbox]:checked {
+  filter: grayscale(100%) ;
+}
+.disabled-textselection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
