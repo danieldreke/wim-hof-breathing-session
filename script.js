@@ -33,7 +33,9 @@ function createYouTubePlayer() {
       'autoplay': 0,
       'playsinline': 1, // Play video inline on iOS [3]
       'controls': 0,
-      'modestbranding' : 1
+      'modestbranding': 1,
+      'cc_lang_pref': 'en',
+      //'cc_load_policy': 0
     },
     events: {
       'onReady': onYouTubePlayerReady,
