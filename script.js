@@ -17,8 +17,10 @@ const STARTTIME_BREATHING_ROUND_3 = 593;
 const ENDTIME_ROUND_1 = STARTTIME_BREATHING_ROUND_1 + 16;
 const ENDTIME_ROUND_2 = STARTTIME_BREATHING_ROUND_2 + 16;
 const ENDTIME_ROUND_3 = STARTTIME_BREATHING_ROUND_3 + 16;
+const ENDTIME_SESSION = 630;
 
 var ytplayer;
+var pausedDueToEndOfSession = false;
 
 function onYouTubeIframeAPIReady() {
   createYouTubePlayer();
@@ -46,7 +48,7 @@ function createYouTubePlayer() {
 }
 
 function getVideoTime() {
-  videotime = ytplayer.getCurrentTime();
+  videotime = parseInt(ytplayer.getCurrentTime());
   return videotime;
 }
 
@@ -66,7 +68,7 @@ function onYouTubePlayerReady(event) {
       var videotime = getVideoTime();
       var isIntroFinished = videotime >= 12;
       var isCloseToEndOfRetention_ = isCloseToEndOfRetention();
-      var isEndOfRound3 = videotime >= 611 && videotime <= 631;
+      var isEndOfRound3 = videotime >= 611 && videotime < ENDTIME_SESSION;
       if (isIntroFinished) {
         hideElementById(BUTTON_SKIP_INTRO);
       }
@@ -84,6 +86,11 @@ function onYouTubePlayerReady(event) {
       else {
         hideElementById(BUTTON_REPLAY_ROUND_2);
         hideElementById(BUTTON_REPLAY_ROUND_3);
+      }
+      var pauseAtEndOfSession = videotime == ENDTIME_SESSION && !pausedDueToEndOfSession;
+      if (pauseAtEndOfSession) {
+        ytplayer.pauseVideo();
+        pausedDueToEndOfSession = true;
       }
     }
   }
