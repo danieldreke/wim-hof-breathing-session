@@ -5,23 +5,24 @@ body {
   margin: 0px;
   background-color: #282828;
   color: white;
+  text-transform: uppercase;
 }
 button {
-  margin: 16px;
+  margin: 24px auto;
   padding: 10px;
   width: 300px;
   background-color: rgba(0, 255, 255, 0.67);
   color: white;
-  white-space: nowrap;
   text-align: center;
-  display: inline-block;
+  display: block;
   cursor: pointer;
   font: inherit;
-  text-transform: uppercase;
   border-radius: 6px;
   border: none;
+  white-space: nowrap;
+  text-transform: uppercase;
 }
-#startsession, #skipintro, #pauseresume, #startbreathingin, #replayround2, #replayround3 {
+#startsession, #skipintro, #pauseresume, #autopausecounter, #startbreathingin, #replayround2, #replayround3 {
   display: none;
 }
 @media (min-height: 1200) and (orientation: portrait) {
@@ -67,13 +68,13 @@ iframe {
 #cboxlabel {
   cursor: pointer;
   display: none;
-  width: 320px;
+  line-height: 18px;
 }
 input[type=checkbox] {
   cursor: pointer;
   filter: grayscale(100%) invert(80%);
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 input[type=checkbox]:hover {
   filter: invert(80%);
@@ -86,4 +87,8 @@ input[type=checkbox]:checked {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+label {
+  margin: 24px auto;
+  white-space: nowrap;
 }
