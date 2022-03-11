@@ -6,6 +6,10 @@ body {
   background-color: #282828;
   color: white;
   text-transform: uppercase;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 button {
   margin: 24px auto;
