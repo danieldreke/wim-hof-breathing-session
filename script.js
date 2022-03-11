@@ -2,6 +2,8 @@
 // [2] Guided Wim Hof Breathing: https://youtu.be/tybOi4hjZFQ
 // [3] Parameter playsinline: https://developers.google.com/youtube/player_parameters#Parameters
 
+const CHECK_VIDEOTIME_INTERVAL_IN_MILLISECONDS = 100;
+
 const BUTTON_START_SESSION = "startsession";
 const BUTTON_SKIP_INTRO = "skipintro";
 const BUTTON_PAUSE_RESUME = "pauseresume";
@@ -16,10 +18,20 @@ const STARTTIME_ROUND_3 = 404;
 const STARTTIME_BREATHING_ROUND_1 = 176;
 const STARTTIME_BREATHING_ROUND_2 = 385;
 const STARTTIME_BREATHING_ROUND_3 = 593;
+
+const STARTTIME_PAUSE_NOTE_ROUND_1 = 159;
+const STARTTIME_PAUSE_NOTE_ROUND_2 = 372;
+const STARTTIME_PAUSE_NOTE_ROUND_3 = 581;
+
+const ENDTIME_INTRO = 11;
 const ENDTIME_ROUND_1 = STARTTIME_BREATHING_ROUND_1 + 16;
 const ENDTIME_ROUND_2 = STARTTIME_BREATHING_ROUND_2 + 16;
-const ENDTIME_ROUND_3 = STARTTIME_BREATHING_ROUND_3 + 16;
+const ENDTIME_ROUND_3 = STARTTIME_BREATHING_ROUND_3 + 19;
 const ENDTIME_SESSION = 630;
+
+const AUTOPAUSE_TIME_ROUND_1 = STARTTIME_BREATHING_ROUND_1 - 8;
+const AUTOPAUSE_TIME_ROUND_2 = STARTTIME_BREATHING_ROUND_2 - 3;
+const AUTOPAUSE_TIME_ROUND_3 = STARTTIME_BREATHING_ROUND_3 - 2;
 
 var ytplayer;
 var pausedDueToEndOfSession = false;
@@ -59,9 +71,9 @@ function getVideoTime() {
 
 function isCloseToEndOfRetention() {
   var videotime = getVideoTime();
-  var isCloseToEndOfRetention1 = videotime >= 159 && videotime < 176;
-  var isCloseToEndOfRetention2 = videotime >= 372 && videotime < 385;
-  var isCloseToEndOfRetention3 = videotime >= 581 && videotime < 593;
+  var isCloseToEndOfRetention1 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_1 && videotime < STARTTIME_BREATHING_ROUND_1;
+  var isCloseToEndOfRetention2 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_2 && videotime < STARTTIME_BREATHING_ROUND_2;
+  var isCloseToEndOfRetention3 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_3 && videotime < STARTTIME_BREATHING_ROUND_3;
   var isCloseToEndOfRetention_ = isCloseToEndOfRetention1 || isCloseToEndOfRetention2 || isCloseToEndOfRetention3;
   return isCloseToEndOfRetention_;
 }
@@ -84,9 +96,9 @@ function onYouTubePlayerReady(event) {
     //return;
     if (ytplayer && ytplayer.getCurrentTime && sessionStarted) {
       var videotime = getVideoTime();
-      var isIntroFinished = videotime >= 12;
+      var isIntroFinished = videotime > ENDTIME_INTRO;
       var isCloseToEndOfRetention_ = isCloseToEndOfRetention();
-      var isEndOfRound3 = videotime >= 611; // && videotime < ENDTIME_SESSION;
+      var isEndOfRound3 = videotime > ENDTIME_ROUND_3; // && videotime < ENDTIME_SESSION;
       if (isIntroFinished) {
         hideElementById(BUTTON_SKIP_INTRO);
       }
@@ -113,9 +125,9 @@ function onYouTubePlayerReady(event) {
         startBreathingInClicked = false;
       }
       var isAutoPauseTime =
-        (videotime == STARTTIME_BREATHING_ROUND_1 - 8)
-        || (videotime == STARTTIME_BREATHING_ROUND_2 - 3)
-        || (videotime == STARTTIME_BREATHING_ROUND_3 - 2);
+        (videotime == AUTOPAUSE_TIME_ROUND_1)
+        || (videotime == AUTOPAUSE_TIME_ROUND_2)
+        || (videotime == AUTOPAUSE_TIME_ROUND_3);
       if (isAutoPauseTime) {
         var pausevideo = isAutoPauseChecked() && !videoAutoPaused;
         if (pausevideo) {
@@ -144,7 +156,7 @@ function onYouTubePlayerReady(event) {
       }
     }
   }
-  timeupdater = setInterval(checkCurrentTime, 100);
+  timeupdater = setInterval(checkCurrentTime, CHECK_VIDEOTIME_INTERVAL_IN_MILLISECONDS);
 }
 
 function onPlayerStateChange(event) {
