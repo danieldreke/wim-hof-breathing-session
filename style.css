@@ -96,3 +96,12 @@ label {
   margin: 24px auto;
   white-space: nowrap;
 }
+/* Disable selection highlighting https://www.tutorialrepublic.com/faq/how-to-disable-text-selection-highlighting-in-the-browsers-using-css.php*/
+::selection {
+    color: none;
+    background: none;
+}
+::-moz-selection {
+    color: none;
+    background: none;
+}
