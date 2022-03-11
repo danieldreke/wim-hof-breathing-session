@@ -12,7 +12,7 @@ body {
   user-select: none;
 }
 button {
-  margin: 24px auto;
+  margin: 30px auto;
   padding: 10px;
   width: 300px;
   background-color: rgba(0, 255, 255, 0.67);
@@ -47,7 +47,7 @@ iframe {
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .vertical-centered {
   margin: auto;
@@ -72,13 +72,14 @@ iframe {
 #cboxlabel {
   cursor: pointer;
   display: none;
-  line-height: 18px;
 }
 input[type=checkbox] {
   cursor: pointer;
   filter: grayscale(100%) invert(80%);
   width: 18px;
   height: 18px;
+  line-height: 30px;
+  padding: 10px;
 }
 input[type=checkbox]:hover {
   filter: invert(80%);
@@ -86,15 +87,17 @@ input[type=checkbox]:hover {
 input[type=checkbox]:checked {
   filter: grayscale(100%) ;
 }
-.disabled-textselection {
+.disable-textselection {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 label {
-  margin: 24px auto;
+  margin: 0px auto;
   white-space: nowrap;
+  line-height: 30px;
+  padding: 10px;
 }
 /* Disable selection highlighting https://www.tutorialrepublic.com/faq/how-to-disable-text-selection-highlighting-in-the-browsers-using-css.php*/
 ::selection {
