@@ -26,7 +26,7 @@ button {
   white-space: nowrap;
   text-transform: uppercase;
 }
-#startsession, #skipintro, #pauseresume, #autopausecounter, #startbreathingin, #replayround2, #replayround3 {
+#startsession, #skipintro, #pauseresume, #autopausestatus, #startbreathingin, #replayround2, #replayround3 {
   display: none;
 }
 @media (min-height: 1200) and (orientation: portrait) {
@@ -69,7 +69,7 @@ iframe {
 .disabled-events {
   pointer-events: none;
 }
-#cboxlabel {
+#labelautopause {
   cursor: pointer;
   display: none;
 }

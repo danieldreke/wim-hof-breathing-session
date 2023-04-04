@@ -10,8 +10,8 @@ const BUTTON_PAUSE_RESUME = "pauseresume";
 const BUTTON_START_BREATHING_IN = "startbreathingin";
 const BUTTON_REPLAY_ROUND_2 = "replayround2";
 const BUTTON_REPLAY_ROUND_3 = "replayround3";
-const CBOX_LABEL_AUTOPAUSE = "cboxlabel";
-const AUTOPAUSE_COUNTER = "autopausecounter";
+const LABEL_AUTOPAUSE = "labelautopause";
+const AUTOPAUSE_STATUS = "autopausestatus";
 
 const STARTTIME_ROUND_2 = 196;
 const STARTTIME_ROUND_3 = 404;
@@ -51,7 +51,7 @@ function createYouTubePlayer() {
     playerVars: {
       'autoplay': 0,
       'playsinline': 1, // Play video inline on iOS [3]
-      'controls': 0,
+      'controls': 2,
       'modestbranding': 1,
       'cc_lang_pref': 'en',
       //'cc_load_policy': 0,
@@ -84,14 +84,14 @@ function isAutoPauseChecked() {
 }
 
 function updateCounter(secondsUntilAutopause) {
-  var counter = document.getElementById(AUTOPAUSE_COUNTER);
+  var counter = document.getElementById(AUTOPAUSE_STATUS);
   var status = `Video will pause in ${secondsUntilAutopause} seconds`;
   counter.innerHTML = status;
 }
 
 function onYouTubePlayerReady(event) {
   showElementById(BUTTON_START_SESSION);
-  showElementById(CBOX_LABEL_AUTOPAUSE);
+  showElementById(LABEL_AUTOPAUSE);
   function checkCurrentTime() {
     //return;
     if (ytplayer && ytplayer.getCurrentTime && sessionStarted) {
@@ -105,7 +105,7 @@ function onYouTubePlayerReady(event) {
       if (isCloseToEndOfRetention_) {
         if (!startBreathingInClicked) {
           if (isAutoPauseChecked()) {
-            showElementById(AUTOPAUSE_COUNTER);
+            showElementById(AUTOPAUSE_STATUS);
             //var secondsUntilAutopause = 173 - videotime;
             //updateCounter(secondsUntilAutopause);
           }
@@ -118,9 +118,9 @@ function onYouTubePlayerReady(event) {
       else {
         hideElementById(BUTTON_PAUSE_RESUME);
         hideElementById(BUTTON_START_BREATHING_IN);
-        hideElementById(AUTOPAUSE_COUNTER);
+        hideElementById(AUTOPAUSE_STATUS);
         if (videotime > 0) {
-          hideElementById(CBOX_LABEL_AUTOPAUSE);
+          hideElementById(LABEL_AUTOPAUSE);
         }
         startBreathingInClicked = false;
       }
@@ -134,12 +134,12 @@ function onYouTubePlayerReady(event) {
           ytplayer.pauseVideo();
           videoAutoPaused = true;
           var pauseStatus = "Video is autopaused";
-          document.getElementById(AUTOPAUSE_COUNTER).innerHTML = pauseStatus;
+          document.getElementById(AUTOPAUSE_STATUS).innerHTML = pauseStatus;
         }
       }
       else {
         videoAutoPaused = false;
-        document.getElementById(AUTOPAUSE_COUNTER).innerHTML = "Video will autopause";
+        document.getElementById(AUTOPAUSE_STATUS).innerHTML = "Video will autopause";
       }
       if (isEndOfRound3) {
         showElementById(BUTTON_REPLAY_ROUND_2);
@@ -213,7 +213,7 @@ function startSession() {
   playVideoAtTime(0);
   sessionStarted = true;
   hideElementById(BUTTON_START_SESSION);
-  hideElementById(CBOX_LABEL_AUTOPAUSE);
+  hideElementById(LABEL_AUTOPAUSE);
   showElementById(BUTTON_SKIP_INTRO);
   document.getElementById("ytplayer").classList.remove("disabled-events");
 }
@@ -225,7 +225,7 @@ function skipIntro() {
 
 function startBreathingIn() {
   hideElementById(BUTTON_START_BREATHING_IN);
-  hideElementById(AUTOPAUSE_COUNTER);
+  hideElementById(AUTOPAUSE_STATUS);
   startBreathingInClicked = true;
   videotime = getVideoTime();
   isRound1 = videotime <= ENDTIME_ROUND_1;
