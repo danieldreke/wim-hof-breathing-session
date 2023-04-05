@@ -1,5 +1,5 @@
 // [1] YouTube IFrame API Code Example: https://developers.google.com/youtube/iframe_api_reference#Getting_Started
-// [2] Guided Wim Hof Breathing: https://youtu.be/tybOi4hjZFQ
+// [2] Guided Wim Hof Breathing: https://youtu.be/VQnZcXLAMdg
 // [3] Parameter playsinline: https://developers.google.com/youtube/player_parameters#Parameters
 
 const CHECK_VIDEOTIME_INTERVAL_IN_MILLISECONDS = 100;
@@ -47,7 +47,7 @@ function createYouTubePlayer() {
   ytplayer = new YT.Player('ytplayer', {
     height: '270',
     width: '480',
-    videoId: 'tybOi4hjZFQ', // Guided Wim Hof Breathing [2]
+    videoId: 'VQnZcXLAMdg', // Guided Wim Hof Breathing [2]
     playerVars: {
       'autoplay': 0,
       'playsinline': 1, // Play video inline on iOS [3]
