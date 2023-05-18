@@ -78,6 +78,15 @@ function isCloseToEndOfRetention() {
   return isCloseToEndOfRetention_;
 }
 
+function showButtonBreatheIn() {
+  var videotime = getVideoTime()
+  var showButtonBreatheIn1 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_1 && videotime < STARTTIME_BREATHING_ROUND_1
+  var showButtonBreatheIn2 = videotime >= STARTTIME_BREATHING_ROUND_2 - 30 && videotime < STARTTIME_BREATHING_ROUND_2
+  var showButtonBreatheIn3 = videotime >= STARTTIME_BREATHING_ROUND_3 - 29 && videotime < STARTTIME_BREATHING_ROUND_3
+  var showButtonBreatheIn_ = showButtonBreatheIn1 || showButtonBreatheIn2 || showButtonBreatheIn3
+  return showButtonBreatheIn_
+}
+
 function isAutoPauseChecked() {
   var isChecked = document.getElementById("autopause").checked;
   return isChecked;
@@ -98,9 +107,18 @@ function onYouTubePlayerReady(event) {
       var videotime = getVideoTime();
       var isIntroFinished = videotime > ENDTIME_INTRO;
       var isCloseToEndOfRetention_ = isCloseToEndOfRetention();
+      var showButtonBreatheIn_ = showButtonBreatheIn();
       var isEndOfRound3 = videotime > ENDTIME_ROUND_3; // && videotime < ENDTIME_SESSION;
       if (isIntroFinished) {
         hideElementById(BUTTON_SKIP_INTRO);
+      }
+      if (showButtonBreatheIn_) {
+        if (!startBreathingInClicked) {
+          showElementById(BUTTON_START_BREATHING_IN);
+        }
+      }
+      else {
+        hideElementById(BUTTON_START_BREATHING_IN);
       }
       if (isCloseToEndOfRetention_) {
         if (!startBreathingInClicked) {
@@ -112,12 +130,10 @@ function onYouTubePlayerReady(event) {
           else {
             showElementById(BUTTON_PAUSE_RESUME);
           }
-          showElementById(BUTTON_START_BREATHING_IN);
         }
       }
       else {
         hideElementById(BUTTON_PAUSE_RESUME);
-        hideElementById(BUTTON_START_BREATHING_IN);
         hideElementById(AUTOPAUSE_STATUS);
         if (videotime > 0) {
           hideElementById(LABEL_AUTOPAUSE);
