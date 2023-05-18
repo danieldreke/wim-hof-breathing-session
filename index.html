@@ -14,9 +14,9 @@
   <script src="script.js"></script>
 </head>
 <body>
-  <!-- https://www.w3schools.com/howto/howto_css_center-vertical.asp -->
-  <div class="container">
-    <div class="vertical-centered">
+  <!-- vcenter via flex: https://blog.logrocket.com/15-ways-implement-vertical-alignment-css/#margin-auto-flex-item -->
+  <div style="display:flex;height:100vh">
+    <div style="margin:auto;width:100%;max-width:80vh;">
       <!-- https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed -->
       <div class="iframe-container">
         <div id="ytplayer" class="disabled-events"></div>
