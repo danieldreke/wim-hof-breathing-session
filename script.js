@@ -124,8 +124,6 @@ function onYouTubePlayerReady(event) {
         if (!startBreathingInClicked) {
           if (isAutoPauseChecked()) {
             showElementById(AUTOPAUSE_STATUS);
-            //var secondsUntilAutopause = 173 - videotime;
-            //updateCounter(secondsUntilAutopause);
           }
           else {
             showElementById(BUTTON_PAUSE_RESUME);
@@ -201,10 +199,6 @@ function playVideo() {
 
 function pauseVideo() {
   ytplayer.pauseVideo();
-  var isCloseToEndOfRetention_ = isCloseToEndOfRetention();
-  if (isCloseToEndOfRetention_) {
-    showElementById(BUTTON_START_BREATHING_IN);
-  }
 }
 
 function isVideoPlaying() {
