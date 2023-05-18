@@ -171,7 +171,7 @@ function updateControls() {
   if (isVideoPlaying()) {
     pauseResume.innerHTML = "Pause Video";
   } else {
-    pauseResume.innerHTML = "Resume Video";
+    pauseResume.innerHTML = "Continue Video";
   }
 }
 
