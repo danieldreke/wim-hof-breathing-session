@@ -1,4 +1,4 @@
-## Wim Hof Breathing Session Web App
+## Wim Hof Guided Breathing Session Web App
 
 Click [here](https://danieldreke.github.io/wim-hof-breathing-session/) to start an interactive breathing session guided by Wim Hof.
 
