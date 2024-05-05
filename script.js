@@ -13,19 +13,26 @@ const BUTTON_REPLAY_ROUND_3 = "replayround3";
 const LABEL_AUTOPAUSE = "labelautopause";
 const AUTOPAUSE_STATUS = "autopausestatus";
 
+const STARTTIME_ROUND_1 = 17
 const STARTTIME_ROUND_2 = 196;
 const STARTTIME_ROUND_3 = 404;
-const STARTTIME_BREATHE_FULLY_IN_ROUND_1 = 176;
-const STARTTIME_BREATHE_FULLY_IN_ROUND_2 = 385;
-const STARTTIME_BREATHE_FULLY_IN_ROUND_3 = 593;
+
+const HOLD_BREATH_ROUND_1 = 117
+const HOLD_BREATH_ROUND_2 = 295
+const HOLD_BREATH_ROUND_3 = 504
+const HOLD_MIN = 30
 
 const STARTTIME_PAUSE_NOTE_ROUND_1 = 159;
 const STARTTIME_PAUSE_NOTE_ROUND_2 = 372;
 const STARTTIME_PAUSE_NOTE_ROUND_3 = 581;
 
+const STARTTIME_BREATHE_FULLY_IN_ROUND_1 = 176;
+const STARTTIME_BREATHE_FULLY_IN_ROUND_2 = 385;
+const STARTTIME_BREATHE_FULLY_IN_ROUND_3 = 593;
+
 const ENDTIME_INTRO = 11;
 const ENDTIME_ROUND_1 = STARTTIME_BREATHE_FULLY_IN_ROUND_1 + 16;
-const ENDTIME_ROUND_2 = STARTTIME_BREATHE_FULLY_IN_ROUND_2 + 16;
+const ENDTIME_ROUND_2 = STARTTIME_BREATHE_FULLY_IN_ROUND_2 + 15;
 const ENDTIME_ROUND_3 = STARTTIME_BREATHE_FULLY_IN_ROUND_3 + 19;
 const ENDTIME_SESSION = 630;
 
@@ -71,18 +78,18 @@ function getVideoTime() {
 
 function isCloseToEndOfRetention() {
   var videotime = getVideoTime();
-  var isCloseToEndOfRetention1 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_1 && videotime < STARTTIME_BREATHE_FULLY_IN_ROUND_1;
-  var isCloseToEndOfRetention2 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_2 && videotime < STARTTIME_BREATHE_FULLY_IN_ROUND_2;
-  var isCloseToEndOfRetention3 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_3 && videotime < STARTTIME_BREATHE_FULLY_IN_ROUND_3;
+  var isCloseToEndOfRetention1 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_1 && videotime <= STARTTIME_BREATHE_FULLY_IN_ROUND_1;
+  var isCloseToEndOfRetention2 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_2 && videotime <= STARTTIME_BREATHE_FULLY_IN_ROUND_2;
+  var isCloseToEndOfRetention3 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_3 && videotime <= STARTTIME_BREATHE_FULLY_IN_ROUND_3;
   var isCloseToEndOfRetention_ = isCloseToEndOfRetention1 || isCloseToEndOfRetention2 || isCloseToEndOfRetention3;
   return isCloseToEndOfRetention_;
 }
 
 function showButtonBreatheIn() {
   var videotime = getVideoTime()
-  var showButtonBreatheIn1 = videotime >= STARTTIME_PAUSE_NOTE_ROUND_1 && videotime < STARTTIME_BREATHE_FULLY_IN_ROUND_1
-  var showButtonBreatheIn2 = videotime >= STARTTIME_BREATHE_FULLY_IN_ROUND_2 - 30 && videotime < STARTTIME_BREATHE_FULLY_IN_ROUND_2
-  var showButtonBreatheIn3 = videotime >= STARTTIME_BREATHE_FULLY_IN_ROUND_3 - 29 && videotime < STARTTIME_BREATHE_FULLY_IN_ROUND_3
+  var showButtonBreatheIn1 = videotime >= HOLD_BREATH_ROUND_1 + HOLD_MIN && videotime <= STARTTIME_BREATHE_FULLY_IN_ROUND_1
+  var showButtonBreatheIn2 = videotime >= HOLD_BREATH_ROUND_2 + HOLD_MIN && videotime <= STARTTIME_BREATHE_FULLY_IN_ROUND_2
+  var showButtonBreatheIn3 = videotime >= HOLD_BREATH_ROUND_3 + HOLD_MIN && videotime <= STARTTIME_BREATHE_FULLY_IN_ROUND_3
   var showButtonBreatheIn_ = showButtonBreatheIn1 || showButtonBreatheIn2 || showButtonBreatheIn3
   return showButtonBreatheIn_
 }
