@@ -165,10 +165,14 @@ function onYouTubePlayerReady(event) {
       if (isEndOfRound3) {
         showElementById(BUTTON_REPLAY_ROUND_2);
         showElementById(BUTTON_REPLAY_ROUND_3);
+        document.body.ondblclick = function() {
+          replayRound2();
+        }
       }
       else {
         hideElementById(BUTTON_REPLAY_ROUND_2);
         hideElementById(BUTTON_REPLAY_ROUND_3);
+        document.body.ondblclick = function() {}
       }
       var pauseAtEndOfSession = videotime == ENDTIME_SESSION && !pausedDueToEndOfSession;
       if (pauseAtEndOfSession) {
