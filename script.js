@@ -122,6 +122,7 @@ function onYouTubePlayerReady(event) {
       if (showButtonBreatheIn_) {
         if (!startBreathingInClicked) {
           showElementById(BUTTON_START_BREATHING_IN);
+          document.body.ondblclick = startBreathingIn
         }
       }
       else {
@@ -165,14 +166,11 @@ function onYouTubePlayerReady(event) {
       if (isEndOfRound3) {
         showElementById(BUTTON_REPLAY_ROUND_2);
         showElementById(BUTTON_REPLAY_ROUND_3);
-        document.body.ondblclick = function() {
-          replayRound2();
-        }
+        document.body.ondblclick = replayRound2
       }
       else {
         hideElementById(BUTTON_REPLAY_ROUND_2);
         hideElementById(BUTTON_REPLAY_ROUND_3);
-        document.body.ondblclick = function() {}
       }
       var pauseAtEndOfSession = videotime == ENDTIME_SESSION && !pausedDueToEndOfSession;
       if (pauseAtEndOfSession) {
@@ -245,6 +243,7 @@ function skipIntro() {
 }
 
 function startBreathingIn() {
+  document.body.ondblclick = function() {}
   hideElementById(BUTTON_START_BREATHING_IN);
   hideElementById(AUTOPAUSE_STATUS);
   startBreathingInClicked = true;
@@ -264,12 +263,14 @@ function startBreathingIn() {
 }
 
 function replayRound2() {
+  document.body.ondblclick = function() {}
   hideElementById(BUTTON_REPLAY_ROUND_2);
   hideElementById(BUTTON_REPLAY_ROUND_3);
   playVideoAtTime(STARTTIME_ROUND_2);
 }
 
 function replayRound3() {
+  document.body.ondblclick = function() {}
   hideElementById(BUTTON_REPLAY_ROUND_2);
   hideElementById(BUTTON_REPLAY_ROUND_3);
   playVideoAtTime(STARTTIME_ROUND_3);
